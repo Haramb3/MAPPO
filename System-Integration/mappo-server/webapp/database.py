@@ -4,14 +4,21 @@ from psycopg2 import Error
 def database(option):
 
     #definim les queries
-    rank = """ select * FROM public.ranking """
-    user_data = """SELECT id, id_group, "name", username, email, age, city, "password" FROM public.user_information;"""
-    
-    cont_no2 = """  SELECT nom_estacio, "data", contaminant, unitats, latitud, longitud, no2
-                    FROM definitiu.no2_csv"""
+    detailed_no2 = """ SELECT nom_estacio, "data", contaminant, unitats, latitud, longitud, quantity
+                FROM public."detailedNO2"; """
+    detailed_co = """SELECT nom_estacio, "data", contaminant, unitats, latitud, longitud, quantity
+                FROM public."detailedCO"; """
 
-    rank_this_month_user = """SELECT public.rankingthismonthUsers();"""
+    detailed_pm10 = """SELECT nom_estacio, "data", contaminant, unitats, latitud, longitud, quantity
+                FROM public."detailedPM10"; """
     
+    avg_no2 = """SELECT public.no2_average(); """
+
+    avg_co = """SELECT public.co_average(); """
+
+    avg_pm10 = """SELECT public.pm10_average(); """
+
+
     try:
         # Connect to an existing database
         connection = psycopg2.connect(user="feflopfeklpznc",
@@ -26,33 +33,40 @@ def database(option):
         print("PostgreSQL server information")
         print(connection.get_dsn_parameters(), "\n")
         # Executing a SQL query
-        #cursor.execute("select * from public.ranking")
-        cursor.execute(rank)
-        # Fetch result
-        rank = cursor.fetchall()
-        #cursor.execute("select * from public.ranking")
-        cursor.execute(user_data)
-        # Fetch result
-        user_data = cursor.fetchall()
-        #cursor.execute("select * from public.ranking")
-        cursor.execute(cont_no2)
-        # Fetch result
-        cont_no2 = cursor.fetchall()
-        
-        cursor.execute(rank_this_month_user)
-        rank_this_month_user = cursor.fetchall()
 
-        print(option)
+        cursor.execute(detailed_no2)
+        # Fetch result
+        detailed_no2 = cursor.fetchall()
+        cursor.execute(detailed_co)
+        # Fetch result
+        detailed_co = cursor.fetchall()
+        cursor.execute(detailed_pm10)
+        # Fetch result
+        detailed_pm10 = cursor.fetchall()
+        cursor.execute(avg_no2)
+        # Fetch result
+        avg_no2 = cursor.fetchall()
+        cursor.execute(avg_co)
+        # Fetch result
+        avg_co = cursor.fetchall()
+        cursor.execute(avg_pm10)
+        # Fetch result
+        avg_pm10 = cursor.fetchall()
 
-        if option == "rank":
-            return rank
-        elif option == "contno2":
-            return cont_no2
-        elif option == "userdata":
-            return user_data
-        elif option == "rankthismonthuser":
-            return rank_this_month_user
 
+
+        if option == "detailed_no2":
+            return detailed_no2
+        elif option == "detailed_co":
+            return detailed_co
+        elif option == "detailed_pm10":
+            return detailed_pm10
+        elif option == "avg_no2":
+            return avg_no2
+        elif option == "avg_co":
+            return avg_co
+        elif option == "avg_pm10":
+            return avg_pm10
 
 
     except (Exception, Error) as error:
@@ -62,3 +76,4 @@ def database(option):
             cursor.close()
             connection.close()
             print("PostgreSQL connection is closed")
+
