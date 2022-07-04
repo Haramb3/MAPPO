@@ -65,4 +65,8 @@ https://localhost:5000/database?option=avg_co
 
 https://localhost:5000/database?option=avg_pm10 
 
+### Forecast
 
+- Forecast with average NO2
+
+https://localhost:5000/forecast?option=avg_no2
