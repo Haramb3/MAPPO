@@ -1,9 +1,9 @@
-flask==2.0.1
-gunicorn==20.1.0
+flask==2.2.5
+gunicorn==22.0.0
 matplotlib==3.5.1
 Shapely==1.8.1.post1
 Taxicab==0.0.3
-scikit-learn==1.0.2
+scikit-learn==1.5.0
 psycopg2==2.9.3
 folium==0.12.1.post1
 geopandas==0.10.2
@@ -14,6 +14,14 @@ pandas==1.4.1
 osmnx==1.1.2
 networkx==2.7.1
 seaborn==0.11.2
-keras==2.9.0
-tensorflow==2.9.1
+keras==2.13.1rc0
+tensorflow==2.12.0rc1
 geopy==2.2.0
+fonttools>=4.43.0 # not directly required, pinned by Snyk to avoid a vulnerability
+pillow>=10.3.0 # not directly required, pinned by Snyk to avoid a vulnerability
+requests>=2.32.2 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
+werkzeug>=3.0.3 # not directly required, pinned by Snyk to avoid a vulnerability
+wheel>=0.38.0 # not directly required, pinned by Snyk to avoid a vulnerability
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
